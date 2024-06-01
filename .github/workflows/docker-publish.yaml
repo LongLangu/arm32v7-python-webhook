@@ -18,10 +18,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build Docker Image
         run: |
-          docker build --tag ghcr.io/$GITHUB_ACTOR/pnovel:latest \
-          --tag ghcr.io/$GITHUB_ACTOR/pnovel:$(echo $GITHUB_SHA | head -c7) \
+          docker build --tag ghcr.io/$GITHUB_ACTOR/arm32v7/python-webhook:latest \
+          --tag ghcr.io/$GITHUB_ACTOR/arm32v7/python-webhook:$(echo $GITHUB_SHA | head -c7) \
           .
       - name: Push Docker Image
         run: |
-          docker push ghcr.io/$GITHUB_ACTOR/pnovel:latest
-          docker push ghcr.io/$GITHUB_ACTOR/pnovel:$(echo $GITHUB_SHA | head -c7)
+          docker push ghcr.io/$GITHUB_ACTOR/arm32v7/python-webhook:latest
+          docker push ghcr.io/$GITHUB_ACTOR/arm32v7/python-webhook:$(echo $GITHUB_SHA | head -c7)
