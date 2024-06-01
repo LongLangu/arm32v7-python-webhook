@@ -16,12 +16,17 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract organization name in lowercase
+        id: extract_org
+        run: |
+          ORG_NAME=$(echo $GITHUB_REPOSITORY | cut -d'/' -f1 | tr '[:upper:]' '[:lower:]')
+          echo "ORG_NAME_LOWER=$ORG_NAME" >> $GITHUB_ENV
       - name: Build Docker Image
         run: |
-          docker build --tag ghcr.io/$GITHUB_ACTOR/arm32v7/python-webhook:latest \
-          --tag ghcr.io/$GITHUB_ACTOR/arm32v7/python-webhook:$(echo $GITHUB_SHA | head -c7) \
+          docker build --tag ghcr.io/$ORG_NAME_LOWER/arm32v7/python-webhook:latest \
+          --tag ghcr.io/$ORG_NAME_LOWER/arm32v7/python-webhook:$(echo $GITHUB_SHA | head -c7) \
           .
       - name: Push Docker Image
         run: |
-          docker push ghcr.io/$GITHUB_ACTOR/arm32v7/python-webhook:latest
-          docker push ghcr.io/$GITHUB_ACTOR/arm32v7/python-webhook:$(echo $GITHUB_SHA | head -c7)
+          docker push ghcr.io/$ORG_NAME_LOWER/arm32v7/python-webhook:latest
+          docker push ghcr.io/$ORG_NAME_LOWER/arm32v7/python-webhook:$(echo $GITHUB_SHA | head -c7)
