@@ -1,0 +1,4 @@
+requests==2.31.0
+feedparser==6.0.10
+arxiv==2.1.0
+python-dateutil==2.9.0.post0
