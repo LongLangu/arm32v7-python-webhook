@@ -40,7 +40,7 @@ COPY --from=builder /build/requirements.txt .
 RUN pip install --no-cache /root/wheels/*
 
 # webhookのコードをコピー
-COPY main.py /
-COPY webhook /webhook
+COPY main.py /app/
+COPY webhook /app/webhook
 
 CMD ["python3"]
