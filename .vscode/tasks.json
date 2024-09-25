@@ -2,9 +2,16 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "python コードの整形",
+            "type": "shell",
+            "command": "ruff check ./ --fix",
+            "args": [],
+            "problemMatcher": [],
+        },
+        {
             "label": "mainブランチから新規ブランチ作成",
             "type": "shell",
-            "command": "git fetch origin; git checkout main; git pull; git fetch origin; git checkout -b ${input:branch}",
+            "command": "git checkout main && git pull && git checkout -b ${input:branch}",
             "args": [],
             "problemMatcher": [],
         },
@@ -18,7 +25,7 @@
         {
             "label": "git commit (変更をコミットしてプッシュできる状態にします)",
             "type": "shell",
-            "command": "git add .; git commit -m '${input:message}'",
+            "command": "git add . && git commit -m \"${input:message}\"",
             "args": [],
             "problemMatcher": [],
         },
@@ -29,19 +36,11 @@
             "args": [],
             "problemMatcher": [],
             "dependsOrder": "sequence",
-            "dependsOn": ["git fetch origin"]
         },
         {
-            "label": "コードの整形",
+            "label": "stgにプルリクエストを作成",
             "type": "shell",
-            "command": "ruff ./ --fix",
-            "args": [],
-            "problemMatcher": [],
-        },
-        {
-            "label": "テストの実行",
-            "type": "shell",
-            "command": "python -m pytest tests",
+            "command": "pull_request",
             "args": [],
             "problemMatcher": [],
         }
